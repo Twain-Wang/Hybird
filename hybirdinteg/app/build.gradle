@@ -1,0 +1,120 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdkVersion 31
+    defaultConfig {
+        applicationId "com.wcy.hybirdinteg"
+        minSdkVersion 21
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true
+        ndk {
+            abiFilters 'x86', 'armeabi-v7a', 'arm64-v8a'
+        }
+    }
+    signingConfigs {
+        debug {
+            keyAlias 'wcy'
+            keyPassword '123456'
+            storeFile file('../wcy.jks')
+            storePassword '123456'
+        }
+        release {
+            keyAlias 'wcy'
+            keyPassword '123456'
+            storeFile file('../wcy.jks')
+            storePassword '123456'
+        }
+    }
+    buildTypes {
+        debug {
+//            initWith release
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            // 必须加入这部分，否则可能导致编译成功的release包在真机中会闪退
+            // 64位包
+//            ndk.abiFilters 'arm64-v8a'
+            // 兼容包
+            ndk.abiFilters 'armeabi-v7a','arm64-v8a'
+        }
+
+        profile {
+            initWith debug
+        }
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled false
+            // 移除无用的resource文件
+            shrinkResources false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            // 必须加入这部分，否则可能导致编译成功的release包在真机中会闪退
+            // 64位包
+//            ndk.abiFilters 'arm64-v8a'
+            // 兼容包
+            ndk.abiFilters 'armeabi-v7a','arm64-v8a'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    aaptOptions {
+        additionalParameters '--auto-add-overlay'
+        ignoreAssetsPattern "!.svn:!.git:.*:!CVS:!thumbs.db:!picasa.ini:!*.scc:*~"
+    }
+           / *代码结束*/
+    packagingOptions {
+        pickFirst 'lib/mips/libzbar.so'
+        pickFirst 'lib/mips/libiconv.so'
+        pickFirst 'lib/mips64/libzbar.so'
+        pickFirst 'lib/mips64/libiconv.so'
+        pickFirst 'lib/armeabi/libzbar.so'
+        pickFirst 'lib/armeabi/libiconv.so'
+        pickFirst 'lib/armeabi-v7a/libzbar.so'
+        pickFirst 'lib/armeabi-v7a/liblamemp3.so'
+        pickFirst 'lib/armeabi-v7a/libnrtc_sdk.so'
+        pickFirst 'lib/armeabi-v7a/libyxbase.so'
+        pickFirst 'lib/armeabi-v7a/libnrtc_mp4v2.so'
+        pickFirst 'lib/armeabi-v7a/libtraceroute.so'
+        pickFirst 'lib/armeabi-v7a/libiconv.so'
+        pickFirst 'lib/armeabi-v7a/libne_audio.so'
+        pickFirst 'lib/arm64-v8a/libyxbase.so'
+        pickFirst 'lib/arm64-v8a/libnrtc_mp4v2.so'
+        pickFirst 'lib/arm64-v8a/libne_audio.so'
+        pickFirst 'lib/arm64-v8a/liblamemp3.so'
+        pickFirst 'lib/arm64-v8a/libiconv.so'
+        pickFirst 'lib/arm64-v8a/libnrtc_sdk.so'
+        pickFirst 'lib/arm64-v8a/libtraceroute.so'
+        pickFirst 'lib/arm64-v8a/libzbar.so'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude: [])
+//    implementation 'androidx.appcompat:appcompat:1.4.1'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    api project(path: ':hybirdservice')
+    implementation project(path: ':hybirdcommon')
+    implementation project(path: ':jnative')
+    implementation project(':flutter')
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.facebook.fresco:fresco:2.5.0'
+    implementation "com.facebook.fresco:animated-gif:2.5.0"
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    implementation 'com.alibaba:fastjson:1.1.46.android'
+}

@@ -1,0 +1,20 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "hybirdinteg"
+include ':app'
+include ':hybirdcommon'
+include ':hybirdhttp'
+include ':hybirdservice'
+include ':jnative'
+include ':knative'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+        settingsDir.parentFile,
+        'fnative/.android/include_flutter.groovy'
+))

@@ -1,0 +1,25 @@
+{
+  "nativePlugins": [
+    {
+      "hooksClass": "",
+      "plugins": [
+        {
+          "type": "module",
+          "name": "LoginModule",
+          "class": "com.wcy.hybirdinteg.modules.LoginModule"
+        },
+        {
+          "type": "module",
+          "name": "MineModule",
+          "class": "com.wcy.hybirdinteg.modules.MineModule"
+        },
+        {
+          "type": "module",
+          "name": "HomeModule",
+          "class": "com.wcy.hybirdinteg.modules.HomeModule"
+        }
+      ]
+    }
+  ]
+}
+
