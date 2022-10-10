@@ -17,7 +17,7 @@ public class MainActivity extends PandoraEntry {
         intent.putExtra("__start_from_to_class__","com.wcy.hybirdinteg.MainPandoraEntry");
         super.onCreate(savedInstanceState);
         try{
-            MainApplication.currActivity = this;
+//            MainApplication.currActivity = this;
 //            LocalStorage.saveSPInfo(MainApplication.getCurrActivity(),"userinfo","");
         }catch (Exception e){
             e.printStackTrace();
